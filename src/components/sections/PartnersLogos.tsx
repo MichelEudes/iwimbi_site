@@ -4,13 +4,11 @@ import React from "react";
 
 // Liste factice (À remplacer plus tard par vos vrais SVG)
 const PARTNERS = [
-  { id: 1, name: "Ministère du Numérique" },
-  { id: 2, name: "Banque Atlantique" },
-  { id: 3, name: "Orange Fab" },
-  { id: 4, name: "Tech Hub Africa" },
-  { id: 5, name: "Ecobank" },
-  { id: 6, name: "Canal+ Afrique" },
-  { id: 7, name: "MTN Group" },
+  { id: 1, name: "Tech Hub Africa" },
+  { id: 2, name: "FindMyGym" },
+  { id: 3, name: "Ore Fab" },
+  { id: 4, name: "Actu Net" },
+
 ];
 
 export function PartnersLogos() {
