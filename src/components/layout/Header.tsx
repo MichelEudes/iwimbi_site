@@ -36,7 +36,7 @@ export function Header() {
             <Link 
               href="/" 
               // J'ai augmenté la largeur (w-36 -> w-40, w-48) et ajouté -mt-1 pour l'alignement vertical
-              className="relative flex items-center h-10 w-36 md:h-12 md:w-48 -mt-1 transition-transform active:scale-95"
+              className="relative flex items-center h-10 w-42 md:h-12 md:w-46 -mt-1 transition-transform active:scale-95"
               onClick={() => setIsOpen(false)}
             >
               <Image 
