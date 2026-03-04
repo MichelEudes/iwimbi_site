@@ -31,20 +31,25 @@ export function Header() {
       <header className="fixed top-4 left-4 right-4 md:top-6 z-[90] max-w-5xl mx-auto">
         <nav className="flex items-center justify-between bg-white/85 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-[2rem] px-5 py-3 md:px-8 md:py-3.5">
           
-          {/* REMPLACEMENT DU TEXTE PAR LE VRAI LOGO */}
-          <Link 
-            href="/" 
-            className="relative h-8 w-28 md:h-10 md:w-36 transition-transform active:scale-95"
-            onClick={() => setIsOpen(false)}
-          >
-            <Image 
-              src="/logo3_sf.png" // Assure-toi que le fichier est dans /public
-              alt="Iwimbi Group Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </Link>
+          {/* LOGO IWIMBI : TAILLE ET POSITION AJUSTÉES */}
+          <div className="flex items-center">
+            <Link 
+              href="/" 
+              // J'ai augmenté la largeur (w-36 -> w-40, w-48) et ajouté -mt-1 pour l'alignement vertical
+              className="relative flex items-center h-10 w-36 md:h-12 md:w-48 -mt-1 transition-transform active:scale-95"
+              onClick={() => setIsOpen(false)}
+            >
+              <Image 
+                src="/logo3_sf.png" // Assure-toi que le fichier est dans /public
+                alt="Iwimbi Group Logo"
+                fill
+                // 'objectPosition: left' force le logo à coller le bord gauche de son cadre
+                style={{ objectFit: 'contain', objectPosition: 'left' }}
+                className="priority"
+                priority
+              />
+            </Link>
+          </div>
 
           {/* NAVIGATION DESKTOP */}
           <div className="hidden lg:flex items-center gap-10">
