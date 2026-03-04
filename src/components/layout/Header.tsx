@@ -27,26 +27,26 @@ export function Header() {
 
   return (
     <>
-      {/* 1. LA PILULE FLOTTANTE - Hauteur fixe pour rester fine */}
+      {/* 1. LA PILULE FLOTTANTE - Hauteur strictement contrôlée */}
       <header className="fixed top-4 left-4 right-4 md:top-6 z-[90] max-w-5xl mx-auto">
-        <nav className="flex items-center justify-between bg-white/85 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-full px-4 py-2 md:px-8 md:py-2">
+        <nav className="flex items-center justify-between bg-white/90 backdrop-blur-xl border border-white/40 shadow-[0_10px_40px_rgb(0,0,0,0.08)] rounded-full px-4 py-1.5 md:px-8 md:py-2">
           
-          {/* LOGO IWIMBI : TAILLE XXL SANS POUSSER LES MURS */}
-          <div className="flex items-center h-10 md:h-12 relative"> 
+          {/* LOGO IWIMBI : IMPACT MAXIMUM */}
+          <div className="flex items-center relative h-10 md:h-12"> 
             <Link 
               href="/" 
-              // Augmentation de la hauteur à h-24 pour laisser le logo respirer
-              // Le -ml-4 permet de bien caler le logo au début de l'arrondi
-              className="relative flex items-center h-16 w-48 md:h-24 md:w-64 -ml-4 transition-transform active:scale-95"
+              // h-20 sur mobile / h-28 sur desktop pour un logo XXL qui respire
+              // On utilise -ml-6 pour coller le logo au bord gauche de l'arrondi
+              className="relative flex items-center h-20 w-48 md:h-28 md:w-72 -ml-6 transition-transform hover:scale-105 active:scale-95"
               onClick={() => setIsOpen(false)}
             >
               <Image 
                 src="/logo3_sf.png" 
                 alt="Iwimbi Group Logo"
                 fill
-                // objectPosition: left est crucial pour ne pas avoir de vide à gauche
+                // 'objectPosition: left' élimine tout espace vide à gauche du texte
                 style={{ objectFit: 'contain', objectPosition: 'left' }}
-                className="brightness-105 contrast-115" 
+                className="brightness-110 contrast-125 saturate-110" 
                 priority
               />
             </Link>
@@ -58,14 +58,14 @@ export function Header() {
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className="text-[11px] font-bold text-gray-800 hover:text-[#4F5B93] transition-colors tracking-[0.2em] uppercase"
+                className="text-[11px] font-extrabold text-[#4F5B93] hover:opacity-70 transition-all tracking-[0.25em] uppercase"
               >
                 {link.name}
               </Link>
             ))}
             
             <Link href="/contact">
-              <button className="bg-[#4F5B93] text-white px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#3D4775] transition-all shadow-md shadow-[#4F5B93]/10">
+              <button className="bg-[#4F5B93] text-white px-7 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#3D4775] transition-all shadow-md">
                 Contact
               </button>
             </Link>
@@ -73,10 +73,10 @@ export function Header() {
 
           {/* BOUTON MENU MOBILE */}
           <button 
-            className="lg:hidden p-2 text-[#4F5B93] hover:bg-gray-50 rounded-full transition-colors"
+            className="lg:hidden p-2 text-[#4F5B93]"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-7 h-7" />
           </button>
         </nav>
       </header>
@@ -88,21 +88,21 @@ export function Header() {
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
-        <button onClick={() => setIsOpen(false)} className="absolute top-8 right-8 p-2 bg-gray-50 rounded-full">
-          <X className="w-8 h-8 text-[#4F5B93]" />
+        <button onClick={() => setIsOpen(false)} className="absolute top-8 right-8 p-3">
+          <X className="w-9 h-9 text-[#4F5B93]" />
         </button>
 
-        <nav className="flex flex-col items-center gap-10">
+        <nav className="flex flex-col items-center gap-12">
           {navLinks.map((link, index) => (
             <Link 
               key={link.name} 
               href={link.href} 
               onClick={() => setIsOpen(false)}
               className={cn(
-                "text-4xl font-black text-[#4F5B93] tracking-tighter transition-all duration-500",
-                isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                "text-5xl font-black text-[#4F5B93] tracking-tighter transition-all duration-500",
+                isOpen ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95"
               )}
-              style={{ transitionDelay: `${index * 50}ms` }}
+              style={{ transitionDelay: `${index * 60}ms` }}
             >
               {link.name}
             </Link>
