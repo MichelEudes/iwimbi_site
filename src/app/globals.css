@@ -1,26 +1,168 @@
+/* 1. Importation du moteur Tailwind v4 */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* 2. Configuration du Thème (Design Tokens de Figma) */
+@theme {
+  /* 🎨 COULEURS */
+  --color-brand-primary: #0056D2;
+  --color-brand-secondary: #1E293B;
+  --color-brand-accent: #F59E0B;
+  
+  --color-surface-light: #FFFFFF;
+  --color-surface-dark: #F3F4F6;
+  
+  --color-text-main: #111827;
+  --color-text-muted: #6B7280;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* 🔤 TYPOGRAPHIE */
+  --font-sans: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+  
+  /* ⬛ OMBRES (Profondeur Premium) */
+  --shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-dropdown: 0px 10px 30px rgba(0, 0, 0, 0.1);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 🌟 ANIMATION NATIVE TAILWIND V4 */
+  --animate-marquee: marquee 35s linear infinite;
+  
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 3. Utilitaires personnalisés v4 */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* 4. Comportement global de base (Les fondations du navigateur) */
+@layer base {
+  /* 🚨 CORRECTION DE L'ESPACE BLANC ICI 🚨 */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+  }
+
+  html {
+    scroll-behavior: smooth; /* Scroll fluide */
+  }
+  
+  body {
+    background-color: var(--color-surface-light);
+    color: var(--color-text-main);
+    
+    /* Optimisation ultime du rendu du texte */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility; 
+    
+    /* Empêche les sauts de page et bloque le scroll horizontal global */
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+  }
+}
+
+/* 5. ANIMATIONS ET MICRO-INTERACTIONS */
+@layer utilities {
+  
+  @keyframes fadeInUpBlur {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .animate-fade-in-up-blur {
+    animation: fadeInUpBlur 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  .animate-blob {
+    animation: blob 15s infinite alternate ease-in-out;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  @keyframes textGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .animate-text-gradient {
+    background-size: 200% auto;
+    animation: textGradient 6s ease infinite;
+  }
+
+  @keyframes scrollLight {
+    0% { transform: translateY(-100%); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(200%); opacity: 0; }
+  }
+  
+  .animate-scroll-light {
+    animation: scrollLight 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+/* À ajouter dans @layer utilities dans globals.css */
+  @keyframes bounce-x {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+
+  /* À AJOUTER TOUT EN BAS DE VOTRE FICHIER globals.css */
+
+  /* 1. Lévitation des cartes (Mouvement vertical fluide) */
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); } /* La carte monte de 8px */
+  }
+  .animate-float-card {
+    animation: floatCard 4s ease-in-out infinite;
+  }
+
+  /* 2. Respiration des icônes (Effet battement de coeur premium) */
+  @keyframes breatheIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); } /* L'icône grossit de 15% */
+  }
+  .animate-breathe-icon {
+    animation: breatheIcon 3s ease-in-out infinite;
+  }
+
+  /* 3. Va-et-vient marqué pour les flèches */
+  @keyframes slideRightPremium {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(8px); } /* La flèche avance de 8px vers la droite */
+  }
+  .animate-slide-right-premium {
+    animation: slideRightPremium 2s ease-in-out infinite;
+  }
