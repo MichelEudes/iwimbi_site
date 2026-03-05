@@ -36,7 +36,7 @@ export function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Gestion intelligente du scroll pour les points de pagination sur mobile
+  // Gestion intelligente du scroll pour l'effet Focus sur mobile
   const handleScroll = () => {
     if (!scrollRef.current) return;
     
@@ -85,57 +85,105 @@ export function Testimonials() {
           <div 
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto pb-8 px-6 gap-6 md:gap-8 snap-x snap-mandatory no-scrollbar lg:grid lg:grid-cols-3 lg:px-12 lg:overflow-visible relative z-0 scroll-smooth"
+            // Ajout de pt-4 pour laisser de la place à l'animation de translation
+            className="flex overflow-x-auto pb-10 pt-4 px-6 gap-6 md:gap-8 snap-x snap-mandatory no-scrollbar lg:grid lg:grid-cols-3 lg:px-12 lg:overflow-visible relative z-0 scroll-smooth"
           >
-            {testimonials.map((t) => (
-              <div 
-                key={t.id} 
-                className={cn(
-                  "min-w-[85vw] md:min-w-0 snap-center relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-500",
-                  "bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
-                  "hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]"
-                )}
-              >
-                {/* L'icône guillemet géante en filigrane (Élégance Éditoriale) */}
-                <Quote className="absolute top-8 right-8 text-brand-primary/5 w-16 h-16 md:w-20 md:h-20 rotate-180 pointer-events-none" />
-                
-                {/* Les 5 étoiles dorées */}
-                <div className="flex items-center gap-1 mb-6 md:mb-8 relative z-10">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                
-                {/* Le Texte du témoignage */}
-                <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-10 flex-grow relative z-10 font-medium">
-                  "{t.quote}"
-                </p>
-                
-                {/* L'auteur et l'entreprise */}
-                <div className="flex items-center gap-4 pt-6 border-t border-gray-50 relative z-10">
-                  {/* Avatar (Généré avec les initiales pour un look propre) */}
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 flex items-center justify-center text-brand-primary font-bold text-sm border border-brand-primary/10 shrink-0">
-                    {t.initials}
+            {testimonials.map((t, index) => {
+              const isActive = index === activeIndex;
+
+              return (
+                <div 
+                  key={t.id} 
+                  className={cn(
+                    "min-w-[85vw] md:min-w-0 snap-center relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-bottom",
+                    "bg-white border shadow-xl",
+                    
+                    // DESKTOP : Comportement classique au survol
+                    "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] lg:scale-100 lg:opacity-100 lg:blur-0 lg:brightness-100 lg:border-gray-100 lg:translate-y-0",
+                    
+                    // MOBILE : Animation Ultra Premium (Profondeur de champ)
+                    isActive 
+                      ? "scale-100 opacity-100 blur-0 brightness-100 border-brand-primary/20 shadow-[0_20px_40px_rgba(0,0,0,0.08)] translate-y-0" 
+                      : "scale-[0.85] opacity-40 blur-[3px] brightness-90 border-transparent shadow-none translate-y-4"
+                  )}
+                >
+                  {/* L'icône guillemet géante en filigrane */}
+                  <Quote className={cn(
+                    "absolute top-8 right-8 w-16 h-16 md:w-20 md:h-20 rotate-180 pointer-events-none transition-colors duration-700",
+                    isActive ? "text-brand-primary/5" : "text-gray-100",
+                    "lg:text-brand-primary/5"
+                  )} />
+                  
+                  {/* Les 5 étoiles dorées (Désaturées si inactives) */}
+                  <div className="flex items-center gap-1 mb-6 md:mb-8 relative z-10">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} className={cn(
+                        "transition-colors duration-700",
+                        isActive ? "fill-amber-400 text-amber-400" : "fill-gray-300 text-gray-300",
+                        "lg:fill-amber-400 lg:text-amber-400"
+                      )} />
+                    ))}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 text-sm md:text-base">{t.name}</h4>
-                    <p className="text-xs text-gray-500 font-medium mt-0.5">{t.role}, <span className="text-brand-primary">{t.company}</span></p>
+                  
+                  {/* Le Texte du témoignage */}
+                  <p className={cn(
+                    "text-base md:text-lg leading-relaxed mb-10 flex-grow relative z-10 font-medium transition-colors duration-700",
+                    isActive ? "text-gray-700" : "text-gray-400",
+                    "lg:text-gray-700"
+                  )}>
+                    "{t.quote}"
+                  </p>
+                  
+                  {/* L'auteur et l'entreprise */}
+                  <div className="flex items-center gap-4 pt-6 border-t border-gray-50 relative z-10">
+                    
+                    {/* Avatar : Gris si inactif, Coloré si actif */}
+                    <div className={cn(
+                      "w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-700 border",
+                      isActive 
+                        ? "bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 text-brand-primary border-brand-primary/10" 
+                        : "bg-gray-50 text-gray-400 border-transparent",
+                      "lg:bg-gradient-to-br lg:from-brand-primary/10 lg:to-brand-primary/5 lg:text-brand-primary lg:border-brand-primary/10"
+                    )}>
+                      {t.initials}
+                    </div>
+                    
+                    <div>
+                      <h4 className={cn(
+                        "font-bold text-sm md:text-base transition-colors duration-700",
+                        isActive ? "text-gray-900" : "text-gray-400",
+                        "lg:text-gray-900"
+                      )}>
+                        {t.name}
+                      </h4>
+                      <p className={cn(
+                        "text-xs font-medium mt-0.5 transition-colors duration-700",
+                        isActive ? "text-gray-500" : "text-gray-300",
+                        "lg:text-gray-500"
+                      )}>
+                        {t.role}, <span className={cn(
+                          "transition-colors duration-700",
+                          isActive ? "text-brand-primary" : "text-gray-400",
+                          "lg:text-brand-primary"
+                        )}>{t.company}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
             
             {/* Espace vide final pour scroller hors du brouillard sur mobile */}
             <div className="min-w-[24px] shrink-0 lg:hidden" />
           </div>
 
           {/* 👇 LES POINTS DE PAGINATION (Visibles uniquement sur mobile) 👇 */}
-          <div className="flex justify-center items-center gap-2 mt-2 lg:hidden">
+          <div className="flex justify-center items-center gap-2 mt-4 lg:hidden">
             {testimonials.map((_, index) => (
               <div
                 key={index}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-500 ease-out",
+                  "h-1.5 rounded-full transition-all duration-700 ease-out",
                   activeIndex === index 
                     ? "w-8 bg-brand-primary" 
                     : "w-1.5 bg-gray-200"

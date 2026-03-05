@@ -4,9 +4,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const stats = [
-  { id: 1, value: "60", suffix: "+", label: "Projets délivrés" },
+  { id: 1, value: "17", suffix: "+", label: "Projets délivrés" },
   { id: 2, value: "98", suffix: "%", label: "Taux de satisfaction" },
-  { id: 3, value: "5", suffix: "+", label: "Pays d'intervention" },
+  { id: 3, value: "3", suffix: "+", label: "Pays d'intervention" },
   { id: 4, value: "24", suffix: "/7", label: "Support technique" },
 ];
 

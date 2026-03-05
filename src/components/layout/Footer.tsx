@@ -33,16 +33,31 @@ export function Footer() {
             </div>
           </div>
 
-          {/* COLONNE LIENS - Gap réduit */}
+          {/* COLONNE LIENS - Liens absolus pour fonctionner depuis n'importe quelle page */}
           <div className="md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Navigation</h4>
             <nav className="flex flex-col gap-2.5">
-              {["Services", "Réalisations", "Expertises", "Contact"].map((item) => (
-                <Link key={item} href={`#${item.toLowerCase()}`} className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
-                  <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
-                  {item}
-                </Link>
-              ))}
+              
+              <Link href="/services" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
+                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
+                Services
+              </Link>
+              
+              <Link href="/#portfolio" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
+                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
+                Réalisations
+              </Link>
+              
+              <Link href="/#temoignages" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
+                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
+                Témoignages
+              </Link>
+              
+              <Link href="/contact" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
+                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
+                Contact
+              </Link>
+
             </nav>
           </div>
 

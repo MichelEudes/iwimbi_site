@@ -118,13 +118,17 @@ export function Header() {
         {/* 🚨 RÉTABLISSEMENT DU BOUTON ET DU MAIL (Version mobile) */}
         <div 
           className={cn(
-            "w-full px-10 flex flex-col items-center gap-6 transition-all duration-700 mt-auto pb-16",
+            "w-full px-10 flex flex-col items-center gap-8 transition-all duration-700 mt-auto pb-16",
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
           style={{ transitionDelay: "400ms" }}
         >
-          <Link href="/contact" className="w-full max-w-xs" onClick={() => setIsOpen(false)}>
-            <button className="w-full bg-[#4F5B93] text-white py-5 rounded-2xl font-bold text-lg uppercase tracking-[0.2em] shadow-2xl shadow-[#4F5B93]/20">
+          {/* BOUTON PREMIUM AVEC LIEN VERS LA PAGE D'ACCUEIL */}
+          <Link href="/#contact" className="w-full max-w-xs relative group" onClick={() => setIsOpen(false)}>
+            {/* Effet de halo (Glow) autour du bouton */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#4F5B93] to-[#81B4C9] rounded-full blur opacity-40 group-active:opacity-80 transition duration-300"></div>
+            {/* Le bouton en lui-même */}
+            <button className="relative w-full bg-[#4F5B93] text-white py-4 rounded-full font-bold text-[13px] uppercase tracking-[0.25em] border border-white/20 active:scale-95 transition-all duration-300 shadow-xl">
               Démarrer un projet
             </button>
           </Link>

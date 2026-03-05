@@ -132,41 +132,46 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <div className="space-y-32 md:space-y-48">
             {detailedServices.map((service, index) => (
-              <Reveal key={service.id}>
-                <div className={cn(
-                  "flex flex-col md:flex-row gap-16 items-start",
-                  index % 2 !== 0 && "md:flex-row-reverse"
-                )}>
-                  {/* Visuel Abstrait / Chiffre */}
-                  <div className="w-full md:w-1/2 aspect-video bg-gray-50 rounded-2xl flex items-center justify-center relative overflow-hidden group">
-                     <span className="text-9xl font-black text-gray-100 group-hover:text-gray-200 transition-colors duration-700 select-none">
-                        {service.number}
-                     </span>
-                     <div className="absolute inset-0 border border-gray-100 rounded-2xl" />
-                  </div>
+              
+              // L'ancre est ajoutée ici pour faire fonctionner les boutons de la page d'accueil
+              <section key={service.id} id={service.id} className="scroll-mt-32">
+                <Reveal>
+                  <div className={cn(
+                    "flex flex-col md:flex-row gap-16 items-start",
+                    index % 2 !== 0 && "md:flex-row-reverse"
+                  )}>
+                    {/* Visuel Abstrait / Chiffre */}
+                    <div className="w-full md:w-1/2 aspect-video bg-gray-50 rounded-2xl flex items-center justify-center relative overflow-hidden group">
+                        <span className="text-9xl font-black text-gray-100 group-hover:text-gray-200 transition-colors duration-700 select-none">
+                          {service.number}
+                        </span>
+                        <div className="absolute inset-0 border border-gray-100 rounded-2xl" />
+                    </div>
 
-                  {/* Contenu */}
-                  <div className="w-full md:w-1/2">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#81B4C9]" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#81B4C9]">Expertise {service.number}</span>
-                    </div>
-                    <h3 className="text-3xl font-bold mb-6 text-[#4F5B93] tracking-tight">{service.title}</h3>
-                    <p className="text-gray-500 font-light leading-relaxed mb-10 text-base italic">
-                      "{service.description}"
-                    </p>
-                    
-                    <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                        {service.features.map((f, i) => (
-                            <div key={i} className="flex items-center gap-3">
-                                <CheckCircle2 size={14} className="text-gray-300" />
-                                <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">{f}</span>
-                            </div>
-                        ))}
+                    {/* Contenu */}
+                    <div className="w-full md:w-1/2">
+                      <div className="flex items-center gap-3 mb-6">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#81B4C9]" />
+                          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#81B4C9]">Expertise {service.number}</span>
+                      </div>
+                      <h3 className="text-3xl font-bold mb-6 text-[#4F5B93] tracking-tight">{service.title}</h3>
+                      <p className="text-gray-500 font-light leading-relaxed mb-10 text-base italic">
+                        "{service.description}"
+                      </p>
+                      
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                          {service.features.map((f, i) => (
+                              <div key={i} className="flex items-center gap-3">
+                                  <CheckCircle2 size={14} className="text-gray-300" />
+                                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">{f}</span>
+                              </div>
+                          ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              </section>
+
             ))}
           </div>
         </div>
