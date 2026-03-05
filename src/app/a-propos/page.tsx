@@ -154,6 +154,34 @@ export default function AboutPage() {
               </div>
             </FadeInSection>
 
+            {/* Étape 3 */}
+            <FadeInSection className="flex flex-col md:flex-row items-center gap-16">
+              <div className="w-full md:w-1/2 overflow-hidden rounded-3xl bg-gray-50 aspect-[4/3] relative group">
+                 <div className="absolute inset-0 flex items-center justify-center text-gray-200/50 font-black text-9xl group-hover:text-[#81B4C9]/20 transition-colors duration-700">03</div>
+                 <div className="absolute inset-0 bg-gradient-to-tr from-gray-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl font-bold mb-6 tracking-tight text-[#4F5B93]">Déploiement & Scalabilité</h3>
+                <p className="text-gray-500 font-light leading-relaxed text-sm md:text-base max-w-sm">
+                  Nous propulsons votre solution sur des infrastructures cloud de pointe, garantissant des performances optimales même lors des pics de charge.
+                </p>
+              </div>
+            </FadeInSection>
+
+            {/* Étape 4 */}
+            <FadeInSection className="flex flex-col md:flex-row-reverse items-center gap-16">
+              <div className="w-full md:w-1/2 overflow-hidden rounded-3xl bg-gray-50 aspect-[4/3] relative group">
+                 <div className="absolute inset-0 flex items-center justify-center text-gray-200/50 font-black text-9xl group-hover:text-[#81B4C9]/20 transition-colors duration-700">04</div>
+                 <div className="absolute inset-0 bg-gradient-to-tr from-gray-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="w-full md:w-1/2 md:pr-12">
+                <h3 className="text-2xl font-bold mb-6 tracking-tight text-[#4F5B93]">Intelligence Continue</h3>
+                <p className="text-gray-500 font-light leading-relaxed text-sm md:text-base max-w-sm">
+                  Le lancement n'est que le début. Nous optimisons vos systèmes en continu via l'analyse de données et le fine-tuning de modèles IA pour une croissance soutenue.
+                </p>
+              </div>
+            </FadeInSection>
+
           </div>
         </div>
       </section>
