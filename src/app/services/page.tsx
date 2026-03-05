@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ArrowUpRight, Cpu, Code2, Palette, CheckCircle2, MessageSquare } from "lucide-react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const detailedServices = [
@@ -133,7 +133,6 @@ export default function ServicesPage() {
           <div className="space-y-32 md:space-y-48">
             {detailedServices.map((service, index) => (
               
-              // L'ancre est ajoutée ici pour faire fonctionner les boutons de la page d'accueil
               <section key={service.id} id={service.id} className="scroll-mt-32">
                 <Reveal>
                   <div className={cn(
@@ -177,16 +176,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 4. CTA : ÉPURÉ */}
-      <section className="py-24 md:py-32 bg-[#141B28] border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-6 text-center text-white">
+      {/* 4. CTA : ÉPURÉ (DÉSORMAIS EN BLANC) */}
+      <section className="py-24 md:py-32 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <Reveal>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12 text-[#4F5B93]">
               Un projet qui nécessite <br /> une main d'expert ?
             </h2>
-            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group">
+            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group text-[#4F5B93]">
               Initialiser la demande
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] transition-all duration-500">
+              <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#4F5B93] group-hover:border-[#4F5B93] group-hover:text-white transition-all duration-500">
                 <ArrowUpRight size={16} />
               </div>
             </Link>
