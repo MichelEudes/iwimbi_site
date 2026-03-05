@@ -27,26 +27,25 @@ export function Header() {
 
   return (
     <>
-      {/* 1. LA PILULE FLOTTANTE - Hauteur strictement contrôlée */}
+      {/* 1. LA PILULE FLOTTANTE */}
       <header className="fixed top-4 left-4 right-4 md:top-6 z-[90] max-w-5xl mx-auto">
-        <nav className="flex items-center justify-between bg-white/90 backdrop-blur-xl border border-white/40 shadow-[0_10px_40px_rgb(0,0,0,0.08)] rounded-full px-4 py-1.5 md:px-8 md:py-2">
+        <nav className="flex items-center justify-between bg-white/90 backdrop-blur-xl border border-white/40 shadow-[0_10px_40px_rgb(0,0,0,0.08)] rounded-full px-5 py-2 md:px-8 md:py-2">
           
-          {/* LOGO IWIMBI : IMPACT MAXIMUM */}
+          {/* LOGO IWIMBI : AJUSTÉ POUR MOBILE (Moins collé) */}
           <div className="flex items-center relative h-10 md:h-12"> 
             <Link 
               href="/" 
-              // h-20 sur mobile / h-28 sur desktop pour un logo XXL qui respire
-              // On utilise -ml-6 pour coller le logo au bord gauche de l'arrondi
-              className="relative flex items-center h-20 w-48 md:h-28 md:w-72 -ml-6 transition-transform hover:scale-105 active:scale-95"
+              // Sur mobile : ml-0 pour laisser l'espace du padding 'px-5' de la nav
+              // Sur desktop : -ml-2 pour un alignement optique parfait
+              className="relative flex items-center h-16 w-40 md:h-24 md:w-64 md:-ml-2 transition-transform hover:scale-105 active:scale-95"
               onClick={() => setIsOpen(false)}
             >
               <Image 
                 src="/logo3_sf.png" 
                 alt="Iwimbi Group Logo"
                 fill
-                // 'objectPosition: left' élimine tout espace vide à gauche du texte
                 style={{ objectFit: 'contain', objectPosition: 'left' }}
-                className="brightness-110 contrast-125 saturate-110" 
+                className="brightness-110 contrast-110" 
                 priority
               />
             </Link>
@@ -65,15 +64,15 @@ export function Header() {
             ))}
             
             <Link href="/contact">
-              <button className="bg-[#4F5B93] text-white px-7 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#3D4775] transition-all shadow-md">
+              <button className="bg-[#4F5B93] text-white px-7 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#3D4775] transition-all">
                 Contact
               </button>
             </Link>
           </div>
 
-          {/* BOUTON MENU MOBILE */}
+          {/* BOUTON MENU MOBILE (Burger) */}
           <button 
-            className="lg:hidden p-2 text-[#4F5B93]"
+            className="lg:hidden p-2 text-[#4F5B93] active:scale-90 transition-transform"
             onClick={() => setIsOpen(!isOpen)}
           >
             <Menu className="w-7 h-7" />
@@ -81,26 +80,33 @@ export function Header() {
         </nav>
       </header>
 
-      {/* 2. LE MENU MOBILE */}
+      {/* 2. LE MENU MOBILE (Burgur Full Screen) */}
       <div 
         className={cn(
           "fixed inset-0 z-[100] bg-white/98 backdrop-blur-3xl flex flex-col items-center pt-32 transition-all duration-500 lg:hidden",
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
         )}
       >
-        <button onClick={() => setIsOpen(false)} className="absolute top-8 right-8 p-3">
-          <X className="w-9 h-9 text-[#4F5B93]" />
+        {/* Halos de lumière décoratifs */}
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#81B4C9]/15 rounded-full blur-[100px] pointer-events-none" />
+
+        <button 
+          onClick={() => setIsOpen(false)} 
+          className="absolute top-8 right-8 p-3 bg-gray-50 rounded-full text-[#4F5B93]"
+        >
+          <X className="w-8 h-8" />
         </button>
 
-        <nav className="flex flex-col items-center gap-12">
+        {/* Liens de navigation */}
+        <nav className="flex flex-col items-center gap-10 mb-16 relative z-10">
           {navLinks.map((link, index) => (
             <Link 
               key={link.name} 
               href={link.href} 
               onClick={() => setIsOpen(false)}
               className={cn(
-                "text-5xl font-black text-[#4F5B93] tracking-tighter transition-all duration-500",
-                isOpen ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95"
+                "text-4xl font-black text-[#4F5B93] tracking-tighter transition-all duration-500",
+                isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               )}
               style={{ transitionDelay: `${index * 60}ms` }}
             >
@@ -108,6 +114,33 @@ export function Header() {
             </Link>
           ))}
         </nav>
+
+        {/* 🚨 RÉTABLISSEMENT DU BOUTON ET DU MAIL (Version mobile) */}
+        <div 
+          className={cn(
+            "w-full px-10 flex flex-col items-center gap-6 transition-all duration-700 mt-auto pb-16",
+            isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          )}
+          style={{ transitionDelay: "400ms" }}
+        >
+          <Link href="/contact" className="w-full max-w-xs" onClick={() => setIsOpen(false)}>
+            <button className="w-full bg-[#4F5B93] text-white py-5 rounded-2xl font-bold text-lg uppercase tracking-[0.2em] shadow-2xl shadow-[#4F5B93]/20">
+              Démarrer un projet
+            </button>
+          </Link>
+          
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+              Contactez-nous
+            </span>
+            <a 
+              href="mailto:contact@iwimbigroup.com" 
+              className="text-sm font-bold text-[#4F5B93] border-b border-[#4F5B93]/20 pb-1"
+            >
+              contact@iwimbigroup.com
+            </a>
+          </div>
+        </div>
       </div>
     </>
   );
