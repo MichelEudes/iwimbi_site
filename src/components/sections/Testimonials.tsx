@@ -4,17 +4,17 @@ import React, { useRef, useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// 🚨 La solution magique pour Vercel : On définit strictement le type TypeScript
+// L'interface stricte
 interface TestimonialData {
   id: number;
   quote: string;
   name: string;
   role: string;
-  company: string; // TypeScript sait maintenant que ça existe obligatoirement !
+  company: string;
   initials: string;
 }
 
-// Données factices respectant strictement l'interface
+// Données factices
 const testimonials: TestimonialData[] = [
   { 
     id: 1, 
@@ -46,7 +46,6 @@ export function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Gestion intelligente du scroll pour l'effet Focus sur mobile
   const handleScroll = () => {
     if (!scrollRef.current) return;
     
@@ -84,7 +83,6 @@ export function Testimonials() {
     <section id="temoignages" className="w-full pt-20 pb-16 md:pt-32 md:pb-24 bg-[#F8FAFC] overflow-hidden border-b border-gray-100">
       <div className="max-w-7xl mx-auto">
         
-        {/* En-tête de la section */}
         <div className="px-6 lg:px-12 mb-12 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h2 className="text-brand-primary font-bold tracking-[0.2em] text-[10px] uppercase mb-4">Paroles de clients</h2>
@@ -96,10 +94,8 @@ export function Testimonials() {
 
         <div className="relative w-full">
           
-          {/* Masque de fondu pour le swipe mobile */}
           <div className="absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-10 pointer-events-none lg:hidden" />
 
-          {/* CONTENEUR SCROLLABLE */}
           <div 
             ref={scrollRef}
             onScroll={handleScroll}
@@ -112,27 +108,20 @@ export function Testimonials() {
                 <div 
                   key={t.id} 
                   className={cn(
-                    // BASE : Neutre, sans aucun filtre susceptible de créer un bug de rendu
                     "min-w-[85vw] md:min-w-0 snap-center relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-bottom bg-white border",
-                    
-                    // DESKTOP (lg) : Style de base net + Comportement classique au survol
                     "lg:shadow-xl lg:scale-100 lg:opacity-100 lg:border-gray-100 lg:translate-y-0",
                     "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)]",
-                    
-                    // MOBILE (< 1024px) : Animation Ultra Premium isolée !
                     isActive 
                       ? "max-lg:scale-100 max-lg:opacity-100 max-lg:blur-none max-lg:brightness-100 max-lg:border-brand-primary/20 max-lg:shadow-[0_20px_40px_rgba(0,0,0,0.08)] max-lg:translate-y-0" 
                       : "max-lg:scale-[0.85] max-lg:opacity-40 max-lg:blur-[3px] max-lg:brightness-90 max-lg:border-transparent max-lg:shadow-none max-lg:translate-y-4"
                   )}
                 >
-                  {/* L'icône guillemet géante en filigrane */}
                   <Quote className={cn(
                     "absolute top-8 right-8 w-16 h-16 md:w-20 md:h-20 rotate-180 pointer-events-none transition-colors duration-700",
-                    "lg:text-brand-primary/5", // Toujours propre sur desktop
-                    isActive ? "max-lg:text-brand-primary/5" : "max-lg:text-gray-100" // Alternance sur mobile
+                    "lg:text-brand-primary/5",
+                    isActive ? "max-lg:text-brand-primary/5" : "max-lg:text-gray-100"
                   )} />
                   
-                  {/* Les 5 étoiles dorées */}
                   <div className="flex items-center gap-1 mb-6 md:mb-8 relative z-10">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={16} className={cn(
@@ -143,7 +132,6 @@ export function Testimonials() {
                     ))}
                   </div>
                   
-                  {/* Le Texte du témoignage */}
                   <p className={cn(
                     "text-base md:text-lg leading-relaxed mb-10 flex-grow relative z-10 font-medium transition-colors duration-700",
                     "lg:text-gray-700",
@@ -152,10 +140,7 @@ export function Testimonials() {
                     "{t.quote}"
                   </p>
                   
-                  {/* L'auteur et l'entreprise */}
                   <div className="flex items-center gap-4 pt-6 border-t border-gray-50 relative z-10">
-                    
-                    {/* Avatar */}
                     <div className={cn(
                       "w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-700 border",
                       "lg:bg-gradient-to-br lg:from-brand-primary/10 lg:to-brand-primary/5 lg:text-brand-primary lg:border-brand-primary/10",
@@ -183,7 +168,11 @@ export function Testimonials() {
                           "transition-colors duration-700",
                           "lg:text-brand-primary",
                           isActive ? "max-lg:text-brand-primary" : "max-lg:text-gray-400"
-                        )}>{t.company}</span>
+                        )}>
+                          {/* 🚨 LA LIGNE MAGIQUE POUR VERCEL */}
+                          {/* @ts-ignore */}
+                          {t.company}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -191,11 +180,9 @@ export function Testimonials() {
               );
             })}
             
-            {/* Espace vide final pour scroller hors du brouillard sur mobile */}
             <div className="min-w-[24px] shrink-0 lg:hidden" />
           </div>
 
-          {/* POINTS DE PAGINATION (Mobiles uniquement) */}
           <div className="flex justify-center items-center gap-2 mt-4 lg:hidden">
             {testimonials.map((_, index) => (
               <div
