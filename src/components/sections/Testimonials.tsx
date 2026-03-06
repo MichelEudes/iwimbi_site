@@ -4,13 +4,24 @@ import React, { useRef, useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Données factices (à remplacer par vos vrais clients)
-const testimonials = [
+// 🚨 La solution magique pour Vercel : On définit strictement le type TypeScript
+interface TestimonialData {
+  id: number;
+  quote: string;
+  name: string;
+  role: string;
+  company: string; // TypeScript sait maintenant que ça existe obligatoirement !
+  initials: string;
+}
+
+// Données factices respectant strictement l'interface
+const testimonials: TestimonialData[] = [
   { 
     id: 1, 
     quote: "Une équipe brillante qui a su transformer notre vision complexe en une plateforme fluide et ultra-performante. Leur maîtrise technique est tout simplement impressionnante.", 
     name: "Aminata Diallo", 
     role: "Directrice Innovation", 
+    company: "FinTech Africa",
     initials: "AD"
   },
   { 
@@ -18,6 +29,7 @@ const testimonials = [
     quote: "L'intégration de l'IA dans nos processus a décuplé notre productivité. Iwimbi n'est pas qu'un simple prestataire, c'est un véritable partenaire stratégique pour notre croissance.", 
     name: "Jean-Marc Laurent", 
     role: "CEO", 
+    company: "LogisTech Solutions",
     initials: "JL"
   },
   { 
@@ -25,6 +37,7 @@ const testimonials = [
     quote: "Design premium, code impeccable et respect strict des délais. C'est de loin la meilleure agence tech avec laquelle nous avons eu l'occasion de collaborer cette année.", 
     name: "Sarah Koné", 
     role: "Fondatrice", 
+    company: "E-Health App",
     initials: "SK"
   }
 ];
@@ -166,7 +179,7 @@ export function Testimonials() {
                         "lg:text-gray-500",
                         isActive ? "max-lg:text-gray-500" : "max-lg:text-gray-300"
                       )}>
-                        {t.role} <span className={cn(
+                        {t.role}, <span className={cn(
                           "transition-colors duration-700",
                           "lg:text-brand-primary",
                           isActive ? "max-lg:text-brand-primary" : "max-lg:text-gray-400"
