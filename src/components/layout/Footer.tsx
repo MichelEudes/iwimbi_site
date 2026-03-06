@@ -65,12 +65,19 @@ export function Footer() {
           <div className="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Contact</h4>
             <div className="flex flex-col gap-4">
+              
+              {/* 🚨 CORRECTION DU CENTRAGE DE L'EMAIL ICI */}
               <a href="mailto:contact@iwimbigroup.com" className="group flex flex-col items-center md:items-start">
                 <p className="text-[10px] text-gray-500 uppercase mb-0.5 tracking-wider">Email</p>
-                <p className="text-sm font-bold group-hover:text-brand-primary transition-colors flex items-center justify-center md:justify-start gap-1.5">
-                  contact@iwimbigroup.com <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all" />
-                </p>
+                <span className="relative inline-block text-sm font-bold group-hover:text-brand-primary transition-colors">
+                  contact@iwimbigroup.com
+                  <ArrowUpRight 
+                    size={14} 
+                    className="absolute top-1/2 -translate-y-1/2 -right-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-primary" 
+                  />
+                </span>
               </a>
+
               <div className="group flex flex-col items-center md:items-start">
                 <p className="text-[10px] text-gray-500 uppercase mb-0.5 tracking-wider">Localisation</p>
                 <p className="text-sm font-bold">Cotonou, Bénin</p>
