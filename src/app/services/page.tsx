@@ -42,33 +42,44 @@ const detailedServices = [
   }
 ];
 
-// Composant de révélation chirurgicale
-const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
+// 🚨 COMPOSANT REVEAL CORRIGÉ (Destruction des classes d'animation après 1s)
+const Reveal = ({ children, id }: { children: React.ReactNode, id?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true);
-        observer.unobserve(entry.target);
+        // Dès que l'animation de 1000ms est finie, on déclenche le "nettoyage"
+        setTimeout(() => setIsAnimationDone(true), 1000); 
+        observer.disconnect();
       }
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 }); // Attend que 15% de la carte soit visible pour déclencher
+
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div 
+    <section 
+      id={id}
       ref={ref}
       className={cn(
-        "transition-all duration-1000 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        "scroll-mt-32 w-full",
+        // Si l'animation est terminée, on n'applique AUCUNE classe de transition
+        // Sinon, on applique les classes d'apparition
+        isAnimationDone 
+          ? "opacity-100" // État statique, netteté garantie
+          : cn(
+              "transition-all duration-1000 ease-out",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            )
       )}
-      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </div>
+    </section>
   );
 };
 
@@ -77,11 +88,11 @@ export default function ServicesPage() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <main className="w-full bg-white selection:bg-[#4F5B93] selection:text-white">
+    <main className="w-full bg-white selection:bg-[#4F5B93] selection:text-white pt-[104px] md:pt-[120px]">
       <Header />
 
       {/* 1. HERO : STYLE CHIRURGICAL */}
-      <section className="relative pt-32 pb-16 md:pt-44 md:pb-24 px-6 lg:px-12">
+      <section className="relative pt-16 pb-16 md:pt-24 md:pb-24 px-6 lg:px-12">
         <div className="max-w-6xl mx-auto">
           <div className={cn(
             "flex flex-col opacity-0 translate-y-4 transition-all duration-1000",
@@ -106,8 +117,8 @@ export default function ServicesPage() {
               <p className="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-md">
                 Notre approche fusionne rigueur méthodologique et innovation technologique pour transformer vos ambitions en actifs numériques.
               </p>
-              <div className="flex justify-end items-end">
-                <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest text-right">
+              <div className="flex justify-start md:justify-end items-end">
+                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest md:text-right">
                   Expertises Tech <br /> & Design Studio
                 </span>
               </div>
@@ -117,11 +128,11 @@ export default function ServicesPage() {
       </section>
 
       {/* 2. SECTION CENTRALE : MANIFESTE SOMBRE */}
-      <section className="bg-[#0B1221] py-20 md:py-32">
+      <section className="bg-[#0B1221] py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-12 text-center">
             <Reveal>
-                <h2 className="text-2xl md:text-4xl font-light text-white leading-snug tracking-tight max-w-3xl mx-auto">
-                    Nous ne nous contentons pas de livrer du code. Nous bâtissons des <span className="text-[#81B4C9]">infrastructures de croissance.</span>
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-snug tracking-tight max-w-3xl mx-auto">
+                    Nous ne nous contentons pas de livrer du code. Nous bâtissons des <span className="text-[#81B4C9] font-medium">infrastructures de croissance.</span>
                 </h2>
             </Reveal>
         </div>
@@ -132,60 +143,55 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <div className="space-y-32 md:space-y-48">
             {detailedServices.map((service, index) => (
-              
-              <section key={service.id} id={service.id} className="scroll-mt-32">
-                <Reveal>
-                  <div className={cn(
-                    "flex flex-col md:flex-row gap-16 items-start",
-                    index % 2 !== 0 && "md:flex-row-reverse"
-                  )}>
-                    {/* Visuel Abstrait / Chiffre */}
-                    <div className="w-full md:w-1/2 aspect-video bg-gray-50 rounded-2xl flex items-center justify-center relative overflow-hidden group">
-                        <span className="text-9xl font-black text-gray-100 group-hover:text-gray-200 transition-colors duration-700 select-none">
-                          {service.number}
-                        </span>
-                        <div className="absolute inset-0 border border-gray-100 rounded-2xl" />
-                    </div>
+              <Reveal key={service.id} id={service.id}>
+                <div className={cn(
+                  "flex flex-col md:flex-row gap-12 md:gap-16 items-start",
+                  index % 2 !== 0 && "md:flex-row-reverse"
+                )}>
+                  {/* Visuel Abstrait / Chiffre */}
+                  <div className="w-full md:w-1/2 aspect-video bg-gray-50 rounded-[2rem] flex items-center justify-center relative overflow-hidden group border border-gray-100 transition-all duration-500 hover:shadow-xl hover:shadow-black/5 hover:bg-white">
+                     <span className="text-[8rem] md:text-[10rem] font-black text-gray-200 group-hover:text-gray-300 group-hover:scale-110 transition-all duration-700 select-none">
+                       {service.number}
+                     </span>
+                  </div>
 
-                    {/* Contenu */}
-                    <div className="w-full md:w-1/2">
-                      <div className="flex items-center gap-3 mb-6">
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#81B4C9]" />
-                          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#81B4C9]">Expertise {service.number}</span>
-                      </div>
-                      <h3 className="text-3xl font-bold mb-6 text-[#4F5B93] tracking-tight">{service.title}</h3>
-                      <p className="text-gray-500 font-light leading-relaxed mb-10 text-base italic">
-                        "{service.description}"
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                          {service.features.map((f, i) => (
-                              <div key={i} className="flex items-center gap-3">
-                                  <CheckCircle2 size={14} className="text-gray-300" />
-                                  <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">{f}</span>
-                              </div>
-                          ))}
-                      </div>
+                  {/* Contenu */}
+                  <div className="w-full md:w-1/2">
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#81B4C9]" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#81B4C9]">Expertise {service.number}</span>
+                    </div>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-6 text-[#4F5B93] tracking-tight">{service.title}</h3>
+                    <p className="text-gray-500 font-light leading-relaxed mb-10 text-base md:text-lg italic">
+                      "{service.description}"
+                    </p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+                        {service.features.map((f, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                                <CheckCircle2 size={16} className="text-[#81B4C9]" />
+                                <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">{f}</span>
+                            </div>
+                        ))}
                     </div>
                   </div>
-                </Reveal>
-              </section>
-
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. CTA : ÉPURÉ (DÉSORMAIS EN BLANC) */}
-      <section className="py-24 md:py-32 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* 4. CTA : ÉPURÉ ET SOMBRE */}
+      <section className="py-24 md:py-32 bg-[#141B28] border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-6 text-center text-white">
           <Reveal>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12 text-[#4F5B93]">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12">
               Un projet qui nécessite <br /> une main d'expert ?
             </h2>
-            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group text-[#4F5B93]">
+            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group">
               Initialiser la demande
-              <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#4F5B93] group-hover:border-[#4F5B93] group-hover:text-white transition-all duration-500">
+              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] transition-all duration-500">
                 <ArrowUpRight size={16} />
               </div>
             </Link>

@@ -68,7 +68,7 @@ export function Footer() {
               <a href="mailto:contact@iwimbigroup.com" className="group flex flex-col items-center md:items-start">
                 <p className="text-[10px] text-gray-500 uppercase mb-0.5 tracking-wider">Email</p>
                 <p className="text-sm font-bold group-hover:text-brand-primary transition-colors flex items-center justify-center md:justify-start gap-1.5">
-                  hello@iwimbi.group <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all" />
+                  contact@iwimbigroup.com <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all" />
                 </p>
               </a>
               <div className="group flex flex-col items-center md:items-start">

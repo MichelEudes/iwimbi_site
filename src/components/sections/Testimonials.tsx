@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +11,6 @@ const testimonials = [
     quote: "Une équipe brillante qui a su transformer notre vision complexe en une plateforme fluide et ultra-performante. Leur maîtrise technique est tout simplement impressionnante.", 
     name: "Aminata Diallo", 
     role: "Directrice Innovation", 
-    company: "FinTech Africa",
     initials: "AD"
   },
   { 
@@ -19,7 +18,6 @@ const testimonials = [
     quote: "L'intégration de l'IA dans nos processus a décuplé notre productivité. Iwimbi n'est pas qu'un simple prestataire, c'est un véritable partenaire stratégique pour notre croissance.", 
     name: "Jean-Marc Laurent", 
     role: "CEO", 
-    company: "LogisTech Solutions",
     initials: "JL"
   },
   { 
@@ -27,7 +25,6 @@ const testimonials = [
     quote: "Design premium, code impeccable et respect strict des délais. C'est de loin la meilleure agence tech avec laquelle nous avons eu l'occasion de collaborer cette année.", 
     name: "Sarah Koné", 
     role: "Fondatrice", 
-    company: "E-Health App",
     initials: "SK"
   }
 ];
@@ -62,6 +59,14 @@ export function Testimonials() {
     setActiveIndex(closestIndex);
   };
 
+  useEffect(() => {
+    if (scrollRef.current && window.innerWidth < 1024) {
+      setTimeout(() => {
+        handleScroll();
+      }, 100);
+    }
+  }, []);
+
   return (
     <section id="temoignages" className="w-full pt-20 pb-16 md:pt-32 md:pb-24 bg-[#F8FAFC] overflow-hidden border-b border-gray-100">
       <div className="max-w-7xl mx-auto">
@@ -78,14 +83,13 @@ export function Testimonials() {
 
         <div className="relative w-full">
           
-          {/* Masque de fondu pour le swipe mobile (Effet Premium) */}
+          {/* Masque de fondu pour le swipe mobile */}
           <div className="absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-10 pointer-events-none lg:hidden" />
 
           {/* CONTENEUR SCROLLABLE */}
           <div 
             ref={scrollRef}
             onScroll={handleScroll}
-            // Ajout de pt-4 pour laisser de la place à l'animation de translation
             className="flex overflow-x-auto pb-10 pt-4 px-6 gap-6 md:gap-8 snap-x snap-mandatory no-scrollbar lg:grid lg:grid-cols-3 lg:px-12 lg:overflow-visible relative z-0 scroll-smooth"
           >
             {testimonials.map((t, index) => {
@@ -95,32 +99,33 @@ export function Testimonials() {
                 <div 
                   key={t.id} 
                   className={cn(
-                    "min-w-[85vw] md:min-w-0 snap-center relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-bottom",
-                    "bg-white border shadow-xl",
+                    // BASE : Neutre, sans aucun filtre susceptible de créer un bug de rendu
+                    "min-w-[85vw] md:min-w-0 snap-center relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-bottom bg-white border",
                     
-                    // DESKTOP : Comportement classique au survol
-                    "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] lg:scale-100 lg:opacity-100 lg:blur-0 lg:brightness-100 lg:border-gray-100 lg:translate-y-0",
+                    // DESKTOP (lg) : Style de base net + Comportement classique au survol
+                    "lg:shadow-xl lg:scale-100 lg:opacity-100 lg:border-gray-100 lg:translate-y-0",
+                    "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)]",
                     
-                    // MOBILE : Animation Ultra Premium (Profondeur de champ)
+                    // MOBILE (< 1024px) : Animation Ultra Premium isolée !
                     isActive 
-                      ? "scale-100 opacity-100 blur-0 brightness-100 border-brand-primary/20 shadow-[0_20px_40px_rgba(0,0,0,0.08)] translate-y-0" 
-                      : "scale-[0.85] opacity-40 blur-[3px] brightness-90 border-transparent shadow-none translate-y-4"
+                      ? "max-lg:scale-100 max-lg:opacity-100 max-lg:blur-none max-lg:brightness-100 max-lg:border-brand-primary/20 max-lg:shadow-[0_20px_40px_rgba(0,0,0,0.08)] max-lg:translate-y-0" 
+                      : "max-lg:scale-[0.85] max-lg:opacity-40 max-lg:blur-[3px] max-lg:brightness-90 max-lg:border-transparent max-lg:shadow-none max-lg:translate-y-4"
                   )}
                 >
                   {/* L'icône guillemet géante en filigrane */}
                   <Quote className={cn(
                     "absolute top-8 right-8 w-16 h-16 md:w-20 md:h-20 rotate-180 pointer-events-none transition-colors duration-700",
-                    isActive ? "text-brand-primary/5" : "text-gray-100",
-                    "lg:text-brand-primary/5"
+                    "lg:text-brand-primary/5", // Toujours propre sur desktop
+                    isActive ? "max-lg:text-brand-primary/5" : "max-lg:text-gray-100" // Alternance sur mobile
                   )} />
                   
-                  {/* Les 5 étoiles dorées (Désaturées si inactives) */}
+                  {/* Les 5 étoiles dorées */}
                   <div className="flex items-center gap-1 mb-6 md:mb-8 relative z-10">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={16} className={cn(
                         "transition-colors duration-700",
-                        isActive ? "fill-amber-400 text-amber-400" : "fill-gray-300 text-gray-300",
-                        "lg:fill-amber-400 lg:text-amber-400"
+                        "lg:fill-amber-400 lg:text-amber-400",
+                        isActive ? "max-lg:fill-amber-400 max-lg:text-amber-400" : "max-lg:fill-gray-300 max-lg:text-gray-300"
                       )} />
                     ))}
                   </div>
@@ -128,8 +133,8 @@ export function Testimonials() {
                   {/* Le Texte du témoignage */}
                   <p className={cn(
                     "text-base md:text-lg leading-relaxed mb-10 flex-grow relative z-10 font-medium transition-colors duration-700",
-                    isActive ? "text-gray-700" : "text-gray-400",
-                    "lg:text-gray-700"
+                    "lg:text-gray-700",
+                    isActive ? "max-lg:text-gray-700" : "max-lg:text-gray-400"
                   )}>
                     "{t.quote}"
                   </p>
@@ -137,13 +142,13 @@ export function Testimonials() {
                   {/* L'auteur et l'entreprise */}
                   <div className="flex items-center gap-4 pt-6 border-t border-gray-50 relative z-10">
                     
-                    {/* Avatar : Gris si inactif, Coloré si actif */}
+                    {/* Avatar */}
                     <div className={cn(
                       "w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-700 border",
+                      "lg:bg-gradient-to-br lg:from-brand-primary/10 lg:to-brand-primary/5 lg:text-brand-primary lg:border-brand-primary/10",
                       isActive 
-                        ? "bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 text-brand-primary border-brand-primary/10" 
-                        : "bg-gray-50 text-gray-400 border-transparent",
-                      "lg:bg-gradient-to-br lg:from-brand-primary/10 lg:to-brand-primary/5 lg:text-brand-primary lg:border-brand-primary/10"
+                        ? "max-lg:bg-gradient-to-br max-lg:from-brand-primary/10 max-lg:to-brand-primary/5 max-lg:text-brand-primary max-lg:border-brand-primary/10" 
+                        : "max-lg:bg-gray-50 max-lg:text-gray-400 max-lg:border-transparent"
                     )}>
                       {t.initials}
                     </div>
@@ -151,20 +156,20 @@ export function Testimonials() {
                     <div>
                       <h4 className={cn(
                         "font-bold text-sm md:text-base transition-colors duration-700",
-                        isActive ? "text-gray-900" : "text-gray-400",
-                        "lg:text-gray-900"
+                        "lg:text-gray-900",
+                        isActive ? "max-lg:text-gray-900" : "max-lg:text-gray-400"
                       )}>
                         {t.name}
                       </h4>
                       <p className={cn(
                         "text-xs font-medium mt-0.5 transition-colors duration-700",
-                        isActive ? "text-gray-500" : "text-gray-300",
-                        "lg:text-gray-500"
+                        "lg:text-gray-500",
+                        isActive ? "max-lg:text-gray-500" : "max-lg:text-gray-300"
                       )}>
-                        {t.role}, <span className={cn(
+                        {t.role} <span className={cn(
                           "transition-colors duration-700",
-                          isActive ? "text-brand-primary" : "text-gray-400",
-                          "lg:text-brand-primary"
+                          "lg:text-brand-primary",
+                          isActive ? "max-lg:text-brand-primary" : "max-lg:text-gray-400"
                         )}>{t.company}</span>
                       </p>
                     </div>
@@ -177,7 +182,7 @@ export function Testimonials() {
             <div className="min-w-[24px] shrink-0 lg:hidden" />
           </div>
 
-          {/* 👇 LES POINTS DE PAGINATION (Visibles uniquement sur mobile) 👇 */}
+          {/* POINTS DE PAGINATION (Mobiles uniquement) */}
           <div className="flex justify-center items-center gap-2 mt-4 lg:hidden">
             {testimonials.map((_, index) => (
               <div

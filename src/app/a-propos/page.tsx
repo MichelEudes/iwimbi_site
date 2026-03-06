@@ -209,14 +209,14 @@ export default function AboutPage() {
       </section>
 
       {/* 4. CTA : ÉPURÉ ET PUISSANT */}
-      <section className="py-24 md:py-32 bg-[#141B28] border-t border-white/5">
+      <section className="py-24 md:py-32 bg-white border-t border-white/5">
         <FadeInSection className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-12 leading-tight text-white">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-12 leading-tight text-[#4F5B93]">
             Collaborons sur votre <br className="hidden md:block"/> prochain chapitre.
           </h2>
-          <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group text-white">
+          <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group text-[#4F5B93]">
             Initialiser le contact
-            <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] transition-all duration-500">
+            <div className="w-10 h-10 rounded-full border border-[#4F5B93] flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] transition-all duration-500">
               <ArrowUpRight size={16} />
             </div>
           </Link>

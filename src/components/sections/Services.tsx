@@ -47,7 +47,6 @@ export function ServicesSection() {
     setActiveIndex(closestIndex);
   };
 
-  // Initialisation au chargement (comme sur les témoignages)
   useEffect(() => {
     if (scrollRef.current && window.innerWidth < 1024) {
       setTimeout(() => {
@@ -69,7 +68,6 @@ export function ServicesSection() {
 
         <div className="relative w-full">
           
-          {/* CONTENEUR SCROLLABLE - Alignement exact sur les Témoignages (px-[9vw], gap-4) */}
           <div 
             ref={scrollRef}
             onScroll={handleScroll}
@@ -81,19 +79,19 @@ export function ServicesSection() {
               return (
                 <Link 
                   key={s.id} 
-                  href={`/services#${s.id}`} // 🚨 MODIFICATION ICI : Création dynamique de l'ancre
+                  href={`/services#${s.id}`} 
                   className={cn(
-                    // min-w-[82vw] pour le léger aperçu
-                    "min-w-[82vw] md:min-w-0 snap-center group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-center",
-                    "bg-white border shadow-xl",
+                    // BASE (Neutre, pas de filtres problématiques)
+                    "min-w-[82vw] md:min-w-0 snap-center group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-center bg-white border",
                     
-                    // DESKTOP : Comportement classique au survol
-                    "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] lg:scale-100 lg:opacity-100 lg:blur-0 lg:brightness-100 lg:border-gray-100 lg:translate-y-0 lg:z-10",
+                    // DESKTOP (lg) : Style de base net + Hover 
+                    "lg:shadow-xl lg:scale-100 lg:opacity-100 lg:border-gray-100 lg:translate-y-0 lg:z-10",
+                    "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)]",
                     
-                    // MOBILE : Animation Ultra Premium (Profondeur de champ)
+                    // MOBILE (< 1024px) : Carrousel avec profondeur de champ gérée de manière isolée
                     isActive 
-                      ? "scale-100 opacity-100 blur-0 brightness-100 border-brand-primary/20 shadow-[0_20px_40px_rgba(0,0,0,0.08)] translate-y-0 z-10" 
-                      : "scale-[0.92] opacity-40 blur-[3px] brightness-90 border-transparent shadow-none translate-y-4 z-0",
+                      ? "max-lg:scale-100 max-lg:opacity-100 max-lg:blur-none max-lg:brightness-100 max-lg:border-brand-primary/20 max-lg:shadow-[0_20px_40px_rgba(0,0,0,0.08)] max-lg:translate-y-0 max-lg:z-10" 
+                      : "max-lg:scale-[0.92] max-lg:opacity-40 max-lg:blur-[3px] max-lg:brightness-90 max-lg:border-transparent max-lg:shadow-none max-lg:translate-y-4 max-lg:z-0",
                     
                     s.accent
                   )}
@@ -101,8 +99,8 @@ export function ServicesSection() {
                   {/* ICÔNE */}
                   <div className={cn(
                     "w-14 h-14 rounded-2xl flex items-center justify-center mb-8 md:mb-10 transition-all duration-700",
-                    isActive ? "bg-brand-primary/10 text-brand-primary" : "bg-gray-100 text-gray-300",
-                    "lg:bg-brand-primary/10 lg:text-brand-primary lg:group-hover:bg-brand-primary lg:group-hover:text-white"
+                    "lg:bg-brand-primary/10 lg:text-brand-primary lg:group-hover:bg-brand-primary lg:group-hover:text-white",
+                    isActive ? "max-lg:bg-brand-primary/10 max-lg:text-brand-primary" : "max-lg:bg-gray-100 max-lg:text-gray-300"
                   )}>
                     <s.icon size={28} strokeWidth={1.5} />
                   </div>
@@ -110,8 +108,8 @@ export function ServicesSection() {
                   {/* TITRE */}
                   <h4 className={cn(
                     "text-2xl font-bold mb-4 transition-colors duration-700",
-                    isActive ? "text-gray-900" : "text-gray-400",
-                    "lg:text-gray-900 lg:group-hover:text-brand-primary"
+                    "lg:text-gray-900 lg:group-hover:text-brand-primary",
+                    isActive ? "max-lg:text-gray-900" : "max-lg:text-gray-400"
                   )}>
                     {s.title}
                   </h4>
@@ -119,8 +117,8 @@ export function ServicesSection() {
                   {/* PARAGRAPHE */}
                   <p className={cn(
                     "text-sm md:text-base leading-relaxed mb-10 flex-grow font-medium transition-colors duration-700",
-                    isActive ? "text-gray-600" : "text-gray-400",
-                    "lg:text-gray-600"
+                    "lg:text-gray-600",
+                    isActive ? "max-lg:text-gray-600" : "max-lg:text-gray-400"
                   )}>
                     {s.desc}
                   </p>
@@ -129,15 +127,15 @@ export function ServicesSection() {
                   <div className="flex items-center justify-between pt-6 border-t border-gray-50">
                     <span className={cn(
                       "text-[10px] font-black tracking-widest uppercase transition-colors duration-700",
-                      isActive ? "text-gray-400" : "text-gray-200",
-                      "lg:text-gray-400 lg:group-hover:text-brand-primary"
+                      "lg:text-gray-400 lg:group-hover:text-brand-primary",
+                      isActive ? "max-lg:text-gray-400" : "max-lg:text-gray-200"
                     )}>
                       Explorer
                     </span>
                     <ArrowRight size={20} className={cn(
                       "transition-all duration-700",
-                      isActive ? "text-gray-400" : "text-gray-200",
-                      "lg:text-gray-400 lg:group-hover:text-brand-primary lg:group-hover:translate-x-2"
+                      "lg:text-gray-400 lg:group-hover:text-brand-primary lg:group-hover:translate-x-2",
+                      isActive ? "max-lg:text-gray-400" : "max-lg:text-gray-200"
                     )} />
                   </div>
                 </Link>
@@ -148,7 +146,7 @@ export function ServicesSection() {
             <div className="min-w-[24px] shrink-0 lg:hidden" />
           </div>
 
-          {/* POINTS DE PAGINATION */}
+          {/* POINTS DE PAGINATION (MOBILE UNIQUEMENT) */}
           <div className="flex justify-center items-center gap-2 mt-4 lg:hidden">
             {services.map((_, index) => (
               <div

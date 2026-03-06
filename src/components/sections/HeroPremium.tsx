@@ -40,7 +40,7 @@ export function HeroPremium() {
   };
 
   return (
-    <section className="relative w-full px-4 pt-24 pb-6 md:pt-32 md:pb-8 overflow-hidden flex flex-col items-center min-h-[100svh] bg-transparent isolate z-0">
+    <section className="relative w-full px-4 pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden flex flex-col items-center min-h-[100svh] bg-transparent isolate z-0">
       
       <NeuralBackground />
 
@@ -137,7 +137,6 @@ export function HeroPremium() {
         <div className="relative mb-6 md:mb-10 w-full flex justify-center">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-1/2 bg-brand-primary/20 blur-[60px] md:blur-[80px] -z-10 rounded-full animate-[pulse_6s_ease-in-out_infinite]"></div>
           
-          {/* 🚨 MODIFICATION ICI : Réduction des tailles de texte (text-4xl, md:text-6xl, lg:text-[4.5rem]) */}
           <h1 
             className={cn(
               "max-w-5xl text-4xl md:text-6xl lg:text-[4.5rem] font-heading font-extrabold text-text-main tracking-tighter leading-[1.1] md:leading-[1.05] opacity-0",
@@ -198,7 +197,7 @@ export function HeroPremium() {
 
       <div 
         className={cn(
-          "relative flex flex-col items-center gap-2 md:gap-3 opacity-0 pointer-events-none mt-12 shrink-0",
+          "relative flex flex-col items-center gap-2 md:gap-3 opacity-0 pointer-events-none mt-12 shrink-0 z-10",
           mounted && "animate-fade-in-up-blur"
         )}
         style={getAnimationDelay(6)}
@@ -209,6 +208,24 @@ export function HeroPremium() {
         <div className="w-[2px] h-8 md:h-12 bg-gray-200/50 relative overflow-hidden rounded-full">
           <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-brand-primary to-transparent animate-scroll-light"></div>
         </div>
+      </div>
+
+      {/* =========================================
+          SÉPARATEUR : VAGUE MINIMALISTE "ULTRA PREMIUM"
+          ========================================= */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform translate-y-[1px] z-20 pointer-events-none">
+        <svg 
+          className="relative block w-full h-[40px] md:h-[80px] lg:h-[100px]" 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 1440 100" 
+          preserveAspectRatio="none"
+        >
+          {/* Une seule courbe pure et asymétrique, tout en douceur */}
+          <path 
+            className="fill-white" 
+            d="M0,50 C360,150 1080,-50 1440,50 L1440,100 L0,100 Z"
+          ></path>
+        </svg>
       </div>
 
     </section>
