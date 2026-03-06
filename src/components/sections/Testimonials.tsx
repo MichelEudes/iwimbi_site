@@ -4,40 +4,36 @@ import React, { useRef, useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// L'interface stricte
+// L'interface stricte : On garde le rôle et on supprime la compagnie
 interface TestimonialData {
   id: number;
   quote: string;
   name: string;
   role: string;
-  company: string;
   initials: string;
 }
 
-// Données factices
+// Données factices : Uniquement avec les rôles
 const testimonials: TestimonialData[] = [
   { 
     id: 1, 
     quote: "Une équipe brillante qui a su transformer notre vision complexe en une plateforme fluide et ultra-performante. Leur maîtrise technique est tout simplement impressionnante.", 
     name: "Aminata Diallo", 
-    role: "Directrice Innovation", 
-    company: "FinTech Africa",
+    role: "Directrice Innovation",
     initials: "AD"
   },
   { 
     id: 2, 
     quote: "L'intégration de l'IA dans nos processus a décuplé notre productivité. Iwimbi n'est pas qu'un simple prestataire, c'est un véritable partenaire stratégique pour notre croissance.", 
     name: "Jean-Marc Laurent", 
-    role: "CEO", 
-    company: "LogisTech Solutions",
+    role: "CEO",
     initials: "JL"
   },
   { 
     id: 3, 
     quote: "Design premium, code impeccable et respect strict des délais. C'est de loin la meilleure agence tech avec laquelle nous avons eu l'occasion de collaborer cette année.", 
     name: "Sarah Koné", 
-    role: "Fondatrice", 
-    company: "E-Health App",
+    role: "Fondatrice",
     initials: "SK"
   }
 ];
@@ -159,20 +155,13 @@ export function Testimonials() {
                       )}>
                         {t.name}
                       </h4>
+                      {/* Affichage du rôle uniquement, avec une belle couleur d'accentuation */}
                       <p className={cn(
                         "text-xs font-medium mt-0.5 transition-colors duration-700",
-                        "lg:text-gray-500",
-                        isActive ? "max-lg:text-gray-500" : "max-lg:text-gray-300"
+                        "lg:text-brand-primary",
+                        isActive ? "max-lg:text-brand-primary" : "max-lg:text-gray-400"
                       )}>
-                        {t.role}, <span className={cn(
-                          "transition-colors duration-700",
-                          "lg:text-brand-primary",
-                          isActive ? "max-lg:text-brand-primary" : "max-lg:text-gray-400"
-                        )}>
-                          {/* 🚨 LA LIGNE MAGIQUE POUR VERCEL */}
-                          {/* @ts-ignore */}
-                          {t.company}
-                        </span>
+                        {t.role}
                       </p>
                     </div>
                   </div>
