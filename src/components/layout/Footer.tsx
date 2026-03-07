@@ -2,7 +2,26 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Facebook, Twitter, Instagram } from "lucide-react";
+
+// COMPOSANT SVG SUR-MESURE POUR TIKTOK
+const Tiktok = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a8 8 0 0 1-5-3v5.5a4 4 0 0 1-4 4Z" />
+  </svg>
+);
 
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -17,15 +36,26 @@ export function Footer() {
           
           {/* COLONNE MARQUE - Espacements réduits */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left">
-            <Link href="/" className="text-2xl font-black tracking-tighter mb-3 group">
-              IWIMBI<span className="text-brand-primary transition-all duration-500 group-hover:pl-1">.</span>
+            
+            {/* 🚨 LOGO CORRIGÉ : Tailles valides et espacement harmonisé */}
+            <Link href="/" className="transition-transform hover:scale-105 duration-300 block -mt-4 mb-2 md:-mt-6 md:mb-4">
+              <Image 
+                src="/logo3_sf.png"
+                alt="Iwimbi Group Logo"
+                width={250} 
+                height={80} 
+                // w-40 = bonne taille mobile | md:w-52 = grande taille PC
+                className="w-40 md:w-52 h-auto object-contain drop-shadow-xl" 
+                priority
+              />
             </Link>
-            <p className="text-gray-400 text-[13px] leading-relaxed max-w-sm font-light">
+
+            <p className="text-gray-400 text-[13px] leading-relaxed max-w-sm font-light mt-0 relative z-10">
               Architectes du futur numérique en Afrique. Nous fusionnons l'IA et le Design pour propulser votre croissance.
             </p>
             
             <div className="flex gap-4 mt-6">
-              {[Linkedin, Twitter, Github].map((Icon, i) => (
+              {[Facebook, Twitter, Instagram, Tiktok].map((Icon, i) => (
                 <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-brand-primary hover:bg-brand-primary/10 transition-all duration-500">
                   <Icon size={16} />
                 </a>
@@ -33,8 +63,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* COLONNE LIENS - Liens absolus pour fonctionner depuis n'importe quelle page */}
-          <div className="md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left">
+          {/* COLONNE LIENS */}
+          <div className="md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left pt-2 md:pt-4">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Navigation</h4>
             <nav className="flex flex-col gap-2.5">
               
@@ -61,12 +91,11 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* COLONNE BUREAU - Gap réduit */}
-          <div className="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left">
+          {/* COLONNE BUREAU */}
+          <div className="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left pt-2 md:pt-4">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Contact</h4>
             <div className="flex flex-col gap-4">
               
-              {/* 🚨 CORRECTION DU CENTRAGE DE L'EMAIL ICI */}
               <a href="mailto:contact@iwimbigroup.com" className="group flex flex-col items-center md:items-start">
                 <p className="text-[10px] text-gray-500 uppercase mb-0.5 tracking-wider">Email</p>
                 <span className="relative inline-block text-sm font-bold group-hover:text-brand-primary transition-colors">
@@ -86,7 +115,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* LIGNE FINALE - Très compacte */}
+        {/* LIGNE FINALE */}
         <div className="relative pt-6 mt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-16 h-[1px] bg-gradient-to-r from-transparent via-brand-primary to-transparent animate-[shimmer_4s_infinite]" />
 
