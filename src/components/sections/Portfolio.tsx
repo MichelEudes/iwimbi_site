@@ -8,21 +8,24 @@ const PROJECTS = [
     id: 1, 
     title: "Bank Connect", 
     cat: "Fintech", 
-    img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200", 
+    // 🌍 Femme africaine souriante utilisant son smartphone (Paiement mobile / Fintech)
+    img: "https://images.unsplash.com/photo-1531123897727-8f129e1bfd8c?q=80&w=1200", 
     size: "md:col-span-12 lg:col-span-8 lg:row-span-2" 
   },
   { 
     id: 2, 
     title: "AgriSmart Data", 
     cat: "IA & Data", 
-    img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800", 
+    // 🌍 Agriculteur africain fier dans son champ (AgriTech / Data)
+    img: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=800", 
     size: "md:col-span-6 lg:col-span-4 lg:row-span-1" 
   },
   { 
     id: 3, 
     title: "Scan Health", 
     cat: "E-Santé", 
-    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800", 
+    // 🌍 Femme médecin noire avec un stéthoscope (e-Santé / IA médicale)
+    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800", 
     size: "md:col-span-6 lg:col-span-4 lg:row-span-1" 
   },
 ];
@@ -102,7 +105,6 @@ export function PortfolioSection() {
           mounted && "opacity-100 translate-y-0"
         )}>
           <h2 className="text-brand-primary font-bold tracking-[0.2em] text-[10px] uppercase mb-4">Portfolio</h2>
-          {/* 🚨 Correction ici pour correspondre aux autres titres */}
           <h3 className="text-3xl md:text-6xl font-heading font-extrabold tracking-tighter leading-tight max-w-3xl">
             Impact <span className="text-brand-primary">Digital.</span>
           </h3>
