@@ -8,15 +8,15 @@ const PROJECTS = [
     id: 1, 
     title: "Bank Connect", 
     cat: "Fintech", 
-    // 🌍 Femme africaine souriante utilisant son smartphone (Paiement mobile / Fintech)
-    img: "https://images.unsplash.com/photo-1531123897727-8f129e1bfd8c?q=80&w=1200", 
+    // ✅ VALIDÉ : Jeune femme à la peau noire
+    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1200", 
     size: "md:col-span-12 lg:col-span-8 lg:row-span-2" 
   },
   { 
     id: 2, 
     title: "AgriSmart Data", 
     cat: "IA & Data", 
-    // 🌍 Agriculteur africain fier dans son champ (AgriTech / Data)
+    // ✅ VALIDÉ : Agriculteur noir
     img: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=800", 
     size: "md:col-span-6 lg:col-span-4 lg:row-span-1" 
   },
@@ -24,8 +24,8 @@ const PROJECTS = [
     id: 3, 
     title: "Scan Health", 
     cat: "E-Santé", 
-    // 🌍 Femme médecin noire avec un stéthoscope (e-Santé / IA médicale)
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800", 
+    // ✅ TA PHOTO : Next.js ira chercher img1.jpg directement dans le dossier public
+    img: "/img1.jpg", 
     size: "md:col-span-6 lg:col-span-4 lg:row-span-1" 
   },
 ];
@@ -61,7 +61,6 @@ const ProjectCard = ({ p, index }: { p: any; index: number }) => {
       )}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      {/* IMAGE AVEC ZOOM CINÉMATIQUE */}
       <img 
         src={p.img} 
         alt={p.title} 
@@ -71,13 +70,10 @@ const ProjectCard = ({ p, index }: { p: any; index: number }) => {
         )} 
       />
       
-      {/* DÉGRADÉ D'ASSOMBRISSEMENT LISSE */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B1221]/95 via-[#0B1221]/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-1000 ease-out" />
       
-      {/* CONTENU TEXTUEL FIXE */}
       <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end pointer-events-none">
         <div>
-          {/* Pilule Catégorie (Ultra Fine) */}
           <div className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/90 text-[9px] font-medium tracking-[0.3em] uppercase w-max mb-5 shadow-2xl">
             {p.cat}
           </div>
@@ -99,18 +95,16 @@ export function PortfolioSection() {
     <section id="portfolio" className="w-full py-24 md:py-32 bg-white relative border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
-        {/* EN-TÊTE HARMONISÉ */}
         <div className={cn(
           "flex flex-col mb-10 md:mb-16 opacity-0 translate-y-4 transition-all duration-1000",
           mounted && "opacity-100 translate-y-0"
         )}>
           <h2 className="text-brand-primary font-bold tracking-[0.2em] text-[10px] uppercase mb-4">Portfolio</h2>
-          <h3 className="text-3xl md:text-6xl font-heading font-extrabold tracking-tighter leading-tight max-w-3xl">
+          <h3 className="text-3xl md:text-6xl font-heading font-extrabold tracking-tighter leading-tight max-w-3xl text-gray-900">
             Impact <span className="text-brand-primary">Digital.</span>
           </h3>
         </div>
 
-        {/* GRILLE BENTO BOX */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 lg:auto-rows-[340px]">
           {PROJECTS.map((p, index) => (
             <ProjectCard key={p.id} p={p} index={index} />

@@ -132,7 +132,7 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-12 text-center">
             <Reveal>
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-snug tracking-tight max-w-3xl mx-auto">
-                    Nous ne nous contentons pas de livrer du code. Nous bâtissons des <span className="text-[#81B4C9] font-medium">infrastructures de croissance.</span>
+                  Nous ne nous contentons pas de livrer du code. Nous bâtissons des <span className="text-[#81B4C9] font-medium">infrastructures de croissance.</span>
                 </h2>
             </Reveal>
         </div>
@@ -182,16 +182,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 4. CTA : ÉPURÉ ET SOMBRE */}
-      <section className="py-24 md:py-32 bg-[#141B28] border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-6 text-center text-white">
+      {/* 4. CTA : ÉPURÉ ET BLANC (Mise à jour) */}
+      <section className="py-24 md:py-32 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 text-center text-[#4F5B93]">
           <Reveal>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12">
               Un projet qui nécessite <br /> une main d'expert ?
             </h2>
-            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group">
+            <Link href="/contact" className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] group text-[#4F5B93] hover:text-[#81B4C9] transition-colors duration-300">
               Initialiser la demande
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] transition-all duration-500">
+              <div className="w-10 h-10 rounded-full border border-[#4F5B93]/20 flex items-center justify-center group-hover:bg-[#81B4C9] group-hover:border-[#81B4C9] group-hover:text-white transition-all duration-500">
                 <ArrowUpRight size={16} />
               </div>
             </Link>

@@ -118,7 +118,8 @@ export function ContactSection() {
                   <input 
                     type="text" 
                     id="name" 
-                    placeholder="Jean Dupont"
+                    // 🚨 CHANGEMENT DU PLACEHOLDER ICI
+                    placeholder="Amadou Diallo"
                     className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl px-5 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all duration-300 hover:bg-gray-50"
                   />
                 </div>
@@ -128,7 +129,8 @@ export function ContactSection() {
                   <input 
                     type="email" 
                     id="email" 
-                    placeholder="jean@entreprise.com"
+                    // 🚨 CHANGEMENT DU PLACEHOLDER ICI
+                    placeholder="amadou@entreprise.com"
                     className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl px-5 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all duration-300 hover:bg-gray-50"
                   />
                 </div>

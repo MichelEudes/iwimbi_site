@@ -23,28 +23,32 @@ const Tiktok = ({ size = 24, className = "" }: { size?: number, className?: stri
   </svg>
 );
 
+// 🚨 TABLEAU DES LIENS DU MENU MIS À JOUR
+const NAV_LINKS = [
+  { label: "À propos", href: "/a-propos" },
+  { label: "Services", href: "/services" },
+  { label: "Blog", href: "/blog" },
+];
+
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer className="relative w-full bg-[#0B1221] text-white overflow-hidden pt-12 pb-6 border-t border-white/5">
-      {/* 🌌 EFFET DE FOND : Réduit pour ne pas déborder */}
+      {/* 🌌 EFFET DE FOND */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-1/4 w-[300px] h-[300px] bg-brand-primary/10 blur-[100px] rounded-full animate-[pulse_8s_infinite] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
           
-          {/* COLONNE MARQUE - Espacements réduits */}
+          {/* COLONNE MARQUE */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left">
-            
-            {/* 🚨 LOGO CORRIGÉ : Tailles valides et espacement harmonisé */}
             <Link href="/" className="transition-transform hover:scale-105 duration-300 block -mt-4 mb-2 md:-mt-6 md:mb-4">
               <Image 
                 src="/logo3_sf.png"
                 alt="Iwimbi Group Logo"
                 width={250} 
                 height={80} 
-                // w-40 = bonne taille mobile | md:w-52 = grande taille PC
                 className="w-40 md:w-52 h-auto object-contain drop-shadow-xl" 
                 priority
               />
@@ -63,35 +67,22 @@ export function Footer() {
             </div>
           </div>
 
-          {/* COLONNE LIENS */}
+          {/* COLONNE LIENS (Générée depuis le nouveau tableau) */}
           <div className="md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left pt-2 md:pt-4">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Navigation</h4>
             <nav className="flex flex-col gap-2.5">
               
-              <Link href="/services" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
-                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
-                Services
-              </Link>
-              
-              <Link href="/#portfolio" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
-                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
-                Réalisations
-              </Link>
-              
-              <Link href="/#temoignages" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
-                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
-                Témoignages
-              </Link>
-              
-              <Link href="/contact" className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
-                <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
-                Contact
-              </Link>
+              {NAV_LINKS.map((link, index) => (
+                <Link key={index} href={link.href} className="group flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-white transition-all duration-300 text-sm font-medium">
+                  <span className="hidden md:block w-0 group-hover:w-3 h-[1px] bg-brand-primary transition-all duration-300" />
+                  {link.label}
+                </Link>
+              ))}
 
             </nav>
           </div>
 
-          {/* COLONNE BUREAU */}
+          {/* COLONNE CONTACT */}
           <div className="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left pt-2 md:pt-4">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary mb-4 md:mb-6">Contact</h4>
             <div className="flex flex-col gap-4">

@@ -56,7 +56,8 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" className="w-full pt-20 pb-12 md:pt-32 md:pb-20 bg-white overflow-hidden border-b border-gray-100">
+    // 🚨 J'ai retiré le "border-b border-gray-100" ici pour un blanc pur en bas de section
+    <section id="services" className="w-full pt-20 pb-12 md:pt-32 md:pb-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         <div className="px-6 lg:px-12 mb-10 md:mb-16">
@@ -81,14 +82,14 @@ export function ServicesSection() {
                   key={s.id} 
                   href={`/services#${s.id}`} 
                   className={cn(
-                    // BASE (Neutre, pas de filtres problématiques)
-                    "min-w-[82vw] md:min-w-0 snap-center group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-center bg-white border",
+                    // BASE : Fond des cartes renforcé en blanc
+                    "min-w-[82vw] md:min-w-0 snap-center group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-700 ease-out origin-center bg-white border border-gray-100",
                     
-                    // DESKTOP (lg) : Style de base net + Hover 
+                    // DESKTOP
                     "lg:shadow-xl lg:scale-100 lg:opacity-100 lg:border-gray-100 lg:translate-y-0 lg:z-10",
                     "lg:hover:-translate-y-4 lg:hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)]",
                     
-                    // MOBILE (< 1024px) : Carrousel avec profondeur de champ gérée de manière isolée
+                    // MOBILE
                     isActive 
                       ? "max-lg:scale-100 max-lg:opacity-100 max-lg:blur-none max-lg:brightness-100 max-lg:border-brand-primary/20 max-lg:shadow-[0_20px_40px_rgba(0,0,0,0.08)] max-lg:translate-y-0 max-lg:z-10" 
                       : "max-lg:scale-[0.92] max-lg:opacity-40 max-lg:blur-[3px] max-lg:brightness-90 max-lg:border-transparent max-lg:shadow-none max-lg:translate-y-4 max-lg:z-0",
@@ -100,7 +101,7 @@ export function ServicesSection() {
                   <div className={cn(
                     "w-14 h-14 rounded-2xl flex items-center justify-center mb-8 md:mb-10 transition-all duration-700",
                     "lg:bg-brand-primary/10 lg:text-brand-primary lg:group-hover:bg-brand-primary lg:group-hover:text-white",
-                    isActive ? "max-lg:bg-brand-primary/10 max-lg:text-brand-primary" : "max-lg:bg-gray-100 max-lg:text-gray-300"
+                    isActive ? "max-lg:bg-brand-primary/10 max-lg:text-brand-primary" : "max-lg:bg-gray-50 max-lg:text-gray-300"
                   )}>
                     <s.icon size={28} strokeWidth={1.5} />
                   </div>
@@ -124,7 +125,7 @@ export function ServicesSection() {
                   </p>
                   
                   {/* BOUTON EXPLORER */}
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-50">
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-50 bg-white">
                     <span className={cn(
                       "text-[10px] font-black tracking-widest uppercase transition-colors duration-700",
                       "lg:text-gray-400 lg:group-hover:text-brand-primary",
@@ -142,11 +143,10 @@ export function ServicesSection() {
               );
             })}
             
-            {/* Espace vide final pour scroller jusqu'au bout sur mobile */}
             <div className="min-w-[24px] shrink-0 lg:hidden" />
           </div>
 
-          {/* POINTS DE PAGINATION (MOBILE UNIQUEMENT) */}
+          {/* POINTS DE PAGINATION */}
           <div className="flex justify-center items-center gap-2 mt-4 lg:hidden">
             {services.map((_, index) => (
               <div
