@@ -76,7 +76,6 @@ export function HeroPremium() {
         </div>
 
         {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
-        {/* 🚨 CORRECTION ICI : top-[38%] pour la remonter encore un peu plus */}
         <div className="absolute top-[38%] right-[2%] anim-float-slow">
           {/* LA CARTE INCLINÉE */}
           <div className="flex flex-col gap-2 p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-2xl rotate-[12deg] scale-[0.70] origin-right transition-all duration-500">
@@ -102,8 +101,9 @@ export function HeroPremium() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 hidden lg:block">
         
         {/* BOÎTE INVISIBLE QUI BOUGE (Gauche) */}
-        <div className="absolute top-20%] left-[6%] anim-float-fast">
-          <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[-2deg]">
+        <div className="absolute top-[18%] left-[6%] anim-float-fast">
+          {/* 🚨 ROTATION AUGMENTÉE : rotate-[-15deg] */}
+          <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[-15deg]">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-brand-primary/10 rounded-lg">
                 <Code2 className="w-5 h-5 text-brand-primary" />
@@ -117,9 +117,9 @@ export function HeroPremium() {
         </div>
 
         {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
-        {/* 🚨 CORRECTION ICI : bottom-[43%] pour la remonter sur ordinateur */}
         <div className="absolute bottom-[43%] right-[10%] anim-float-slow">
-          <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[3deg]">
+          {/* 🚨 ROTATION AUGMENTÉE : rotate-[15deg] */}
+          <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[15deg]">
             <div className="flex items-center gap-3 mb-1">
               <div className="p-2 bg-brand-accent/10 rounded-lg">
                 <TrendingUp className="w-5 h-5 text-brand-accent" />
