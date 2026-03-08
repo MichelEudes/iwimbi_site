@@ -11,7 +11,7 @@ import { NeuralBackground } from "@/components/ui/NeuralBackground";
 export function HeroPremium() {
   const [mounted, setMounted] = useState(false);
   
-  // ÉTAT POUR LE TEXTE ROTATIF
+  // ÉTAT POUR LE TEXTE ROTATIF - Mots courts et de longueur équivalente pour une stabilité parfaite
   const [wordIndex, setWordIndex] = useState(0);
   const [isAnimatingWord, setIsAnimatingWord] = useState(false);
   const rotatingWords = [
@@ -60,7 +60,7 @@ export function HeroPremium() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 lg:hidden">
         
         {/* BOÎTE INVISIBLE QUI BOUGE (Gauche) */}
-        <div className="absolute top-[28%] -left-[4%] anim-float-fast">
+        <div className="absolute top-[22%] left-[2%] anim-float-fast">
           {/* LA CARTE INCLINÉE */}
           <div className="flex flex-col gap-2 p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-2xl rotate-[-12deg] scale-[0.70] origin-left transition-all duration-500">
             <div className="flex items-center gap-3">
@@ -76,7 +76,8 @@ export function HeroPremium() {
         </div>
 
         {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
-        <div className="absolute top-[46%] -right-[4%] anim-float-slow">
+        {/* 🚨 CORRECTION ICI : top-[38%] pour la remonter encore un peu plus */}
+        <div className="absolute top-[38%] right-[2%] anim-float-slow">
           {/* LA CARTE INCLINÉE */}
           <div className="flex flex-col gap-2 p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-2xl rotate-[12deg] scale-[0.70] origin-right transition-all duration-500">
             <div className="flex items-center gap-3 mb-1">
@@ -101,7 +102,7 @@ export function HeroPremium() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 hidden lg:block">
         
         {/* BOÎTE INVISIBLE QUI BOUGE (Gauche) */}
-        <div className="absolute top-[25%] left-[8%] anim-float-fast">
+        <div className="absolute top-[18%] left-[6%] anim-float-fast">
           <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[-2deg]">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-brand-primary/10 rounded-lg">
@@ -116,7 +117,8 @@ export function HeroPremium() {
         </div>
 
         {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
-        <div className="absolute bottom-[35%] right-[8%] anim-float-slow">
+        {/* 🚨 CORRECTION ICI : bottom-[43%] pour la remonter sur ordinateur */}
+        <div className="absolute bottom-[43%] right-[10%] anim-float-slow">
           <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[3deg]">
             <div className="flex items-center gap-3 mb-1">
               <div className="p-2 bg-brand-accent/10 rounded-lg">
