@@ -42,84 +42,102 @@ export function HeroPremium() {
   return (
     <section className="relative w-full px-4 pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden flex flex-col items-center min-h-[100svh] bg-transparent isolate z-0">
       
+      {/* 🚨 CSS GARANTI À 100% : Animations simples rattachées à des classes standard */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes levitation {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .anim-float-fast { animation: levitation 6s ease-in-out infinite; }
+        .anim-float-slow { animation: levitation 8s ease-in-out infinite; animation-delay: 1s; }
+      `}} />
+
       <NeuralBackground />
 
       {/* =========================================
           1. CARTES FLOTTANTES (VERSION MOBILE) 
-          Ingénierie spatiale : Placées dans les "Safe Zones"
           ========================================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 lg:hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 lg:hidden">
         
-        {/* CARTE GAUCHE : Caleée en haut à gauche, à côté du badge */}
-        <div className="flex absolute top-[8%] sm:top-[12%] left-[-5%] sm:left-[2%] flex-col gap-2 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.08)] animate-[float_6s_ease-in-out_infinite] rotate-[-6deg] origin-left scale-[0.80] sm:scale-100 transition-all duration-500">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-brand-primary/10 rounded-xl">
-              <Code2 className="w-5 h-5 text-brand-primary" />
-            </div>
-            <div className="pr-3">
-              <p className="text-[10px] font-black text-brand-primary/80 uppercase tracking-[0.2em] mb-0.5">Architecture</p>
-              <p className="text-sm font-extrabold text-gray-900 leading-none">Code & IA</p>
+        {/* BOÎTE INVISIBLE QUI BOUGE (Gauche) */}
+        <div className="absolute top-[28%] -left-[4%] anim-float-fast">
+          {/* LA CARTE INCLINÉE */}
+          <div className="flex flex-col gap-2 p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-2xl rotate-[-12deg] scale-[0.70] origin-left transition-all duration-500">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-brand-primary/10 rounded-lg">
+                <Code2 className="w-5 h-5 text-brand-primary" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Architecture</p>
+                <p className="text-sm font-extrabold text-gray-900">Code & IA</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* CARTE DROITE : Calée en bas à droite, entre les boutons et le scroll */}
-        <div className="flex absolute bottom-[10%] sm:bottom-[15%] right-[-5%] sm:right-[2%] flex-col gap-3 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.08)] animate-[float_7s_ease-in-out_infinite_reverse] rotate-[6deg] origin-right scale-[0.80] sm:scale-100 transition-all duration-500">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2.5 bg-amber-500/10 rounded-xl">
-              <TrendingUp className="w-5 h-5 text-amber-600" />
+        {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
+        <div className="absolute top-[46%] -right-[4%] anim-float-slow">
+          {/* LA CARTE INCLINÉE */}
+          <div className="flex flex-col gap-2 p-3 rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-2xl rotate-[12deg] scale-[0.70] origin-right transition-all duration-500">
+            <div className="flex items-center gap-3 mb-1">
+              <div className="p-2 bg-brand-accent/10 rounded-lg">
+                <TrendingUp className="w-5 h-5 text-brand-accent" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Performance</p>
+                <p className="text-sm font-extrabold text-gray-900">+120% ROI</p>
+              </div>
             </div>
-            <div className="pr-3">
-              <p className="text-[10px] font-black text-amber-600/80 uppercase tracking-[0.2em] mb-0.5">Performance</p>
-              <p className="text-sm font-extrabold text-gray-900 leading-none">+120% ROI</p>
+            <div className="w-28 h-1.5 bg-gray-200/50 rounded-full overflow-hidden">
+              <div className="w-[80%] h-full bg-gradient-to-r from-brand-primary to-brand-accent rounded-full"></div>
             </div>
-          </div>
-          <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-            <div className="w-[85%] h-full bg-gradient-to-r from-brand-primary to-amber-500 rounded-full"></div>
           </div>
         </div>
       </div>
 
       {/* =========================================
-          2. CARTES FLOTTANTES (VERSION ORDINATEUR)
-          Glassmorphism premium avec beaucoup d'espace
+          2. CARTES FLOTTANTES (VERSION ORDINATEUR) 
           ========================================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 hidden lg:block">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 hidden lg:block">
         
-        {/* CARTE GAUCHE */}
-        <div className="absolute top-[20%] left-[5%] flex flex-col gap-3 p-5 rounded-[1.5rem] bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_20px_40px_rgba(0,0,0,0.06)] animate-[float_6s_ease-in-out_infinite] rotate-[-4deg] transition-transform hover:scale-105 duration-500">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-brand-primary/15 rounded-xl">
-              <Code2 className="w-6 h-6 text-brand-primary" />
-            </div>
-            <div>
-              <p className="text-[10px] font-black text-brand-primary/80 uppercase tracking-[0.2em] mb-0.5">Architecture</p>
-              <p className="text-base font-extrabold text-gray-900 tracking-tight">Code & IA</p>
+        {/* BOÎTE INVISIBLE QUI BOUGE (Gauche) */}
+        <div className="absolute top-[25%] left-[8%] anim-float-fast">
+          <div className="flex flex-col gap-2 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[-2deg]">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-brand-primary/10 rounded-lg">
+                <Code2 className="w-5 h-5 text-brand-primary" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Architecture</p>
+                <p className="text-sm font-extrabold text-gray-900">Code & IA</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* CARTE DROITE */}
-        <div className="absolute bottom-[25%] right-[5%] flex flex-col gap-4 p-5 rounded-[1.5rem] bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_20px_40px_rgba(0,0,0,0.06)] animate-[float_7s_ease-in-out_infinite_reverse] rotate-[3deg] transition-transform hover:scale-105 duration-500">
-          <div className="flex items-center gap-4 mb-1">
-            <div className="p-3 bg-amber-500/15 rounded-xl">
-              <TrendingUp className="w-6 h-6 text-amber-600" />
+        {/* BOÎTE INVISIBLE QUI BOUGE (Droite) */}
+        <div className="absolute bottom-[35%] right-[8%] anim-float-slow">
+          <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rotate-[3deg]">
+            <div className="flex items-center gap-3 mb-1">
+              <div className="p-2 bg-brand-accent/10 rounded-lg">
+                <TrendingUp className="w-5 h-5 text-brand-accent" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Performance</p>
+                <p className="text-sm font-extrabold text-gray-900">+120% ROI</p>
+              </div>
             </div>
-            <div>
-              <p className="text-[10px] font-black text-amber-600/80 uppercase tracking-[0.2em] mb-0.5">Performance</p>
-              <p className="text-base font-extrabold text-gray-900 tracking-tight">+120% ROI</p>
+            <div className="w-32 h-1.5 bg-gray-200/50 rounded-full overflow-hidden">
+              <div className="w-[80%] h-full bg-gradient-to-r from-brand-primary to-brand-accent rounded-full"></div>
             </div>
-          </div>
-          <div className="w-40 h-2 bg-gray-200/60 rounded-full overflow-hidden">
-            <div className="w-[85%] h-full bg-gradient-to-r from-brand-primary to-amber-500 rounded-full"></div>
           </div>
         </div>
       </div>
 
       {/* =========================================
-          CONTENU PRINCIPAL DU HERO (z-10)
+          CONTENU PRINCIPAL DU HERO
           ========================================= */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-6xl relative z-10 pointer-events-none px-2 mt-8 md:mt-0">
+      <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-6xl relative z-10 pointer-events-none px-2">
         
         <div 
           className={cn(
@@ -179,7 +197,7 @@ export function HeroPremium() {
           style={getAnimationDelay(4)}
         >
           <Button variant="primary" size="lg" className="w-full sm:w-auto relative overflow-hidden border-t border-white/20 shadow-[0_0_20px_rgba(0,86,210,0.3)] animate-[pulse_3s_ease-in-out_infinite] active:scale-95 transition-all duration-300" asChild>
-            <Link href="/contact">
+            <Link href="/#contact">
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-15deg)_translateX(-100%)] animate-[shimmer_4s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
               <span className="relative z-10 flex items-center gap-2.5">
                 Démarrer votre projet
@@ -197,12 +215,9 @@ export function HeroPremium() {
 
       </div>
 
-      {/* =========================================
-          INDICATEUR DE SCROLL
-          ========================================= */}
       <div 
         className={cn(
-          "relative flex flex-col items-center gap-2 md:gap-3 opacity-0 pointer-events-none mt-12 shrink-0 z-10 mb-8 md:mb-0",
+          "relative flex flex-col items-center gap-2 md:gap-3 opacity-0 pointer-events-none mt-12 shrink-0 z-10",
           mounted && "animate-fade-in-up-blur"
         )}
         style={getAnimationDelay(6)}
